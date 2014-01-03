@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Cisco Webex Kai Fang query</title>
+<script type="text/javascript" src="jquery-1.4.min.js"></script>
+<script type="text/javascript" src="json.min.js"></script>
+<script>
+function publish(){
+   var reqUrl="kf/";
+   var id=document.form1.id.value;
+   reqUrl=reqUrl+id;
+   //var param=JSON.parse(document.form1.activity.value);
+   $.postJSON(reqUrl, null, function(data) {
+					
+					$('#status').val(JSON.stringify(data));
+	     });
+}
+
+function publish2(){
+	   var reqUrl="kf/get/";
+	   var name=document.form1.username.value;
+	   reqUrl=reqUrl+name;
+	   //var param=JSON.parse(document.form1.activity.value);
+	   $.postJSON(reqUrl, null, function(data) {
+						
+						$('#status').val(JSON.stringify(data));
+		     });
+	}
+</script>
+</head>
+
+<body>
+<form name="form1">
+Query Kai Fang test page:
+<Hr>
+Input Card ID: <input type=text name="id" size=40 value="input card ID">
+ <BR>
+ or Input User name : <input type=text name="username" size=40 value="input user name">
+<Hr>
+ <input type="button" name="submit" id="submit"  value="Cha Kai Fang By cardID" onClick="javascript:publish()"/>
+  <input type="button" name="submit2" id="submit2"  value="Cha Kai Fang By user name" onClick="javascript:publish2()"/>
+ <Hr>
+ Received message:
+ <BR>
+ <textarea rows="12" cols="90" id="status"></textarea>
+ </form>
+ <!--
+{
+   "actor":
+    {
+        "id":"otis",
+        "url":"http://localhost/users/otis",
+        "displayName":"Otis"
+    },
+    "verb":"invite",
+    "object":
+    {
+        "id":"foo",
+        "url":"http://localhost/users/foo",
+        "displayName":"Foo"
+    },
+    "target":
+    {
+        "id":"test_meeting1",
+        "url":"http://localhost/meetings/test_meeting1",
+        "displayName":"test meeting 1"
+    },
+     "recipients":[{
+        "id":"foo",
+        "url":"http://localhost/users/foo",
+        "displayName":"Foo"
+    },
+    {
+        "id":"otis",
+        "url":"http://localhost/users/otis",
+        "displayName":"Otis"
+    }]
+}
+
+
+ -->
+</body>
+</html>
